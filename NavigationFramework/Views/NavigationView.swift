@@ -24,16 +24,12 @@ public struct NavigationView<Content>: View where Content: View {
     public var body: some View {
         ZStack {
             ForEach(navigationService.stack, id: \.id) {
-                let isLast = navigationService.stack.isLast(forId: $0.id)
-                $0.view
-                    .fullScreen()
-                    .overlay(overlay(isLast: isLast), alignment: .center)
-                    .offset(x: isLast ? navigationService.offset : 0)
+                view(forItem: $0)
             }
         }
         .fullScreen()
         .onAppear {
-            navigationService.push(firstScreen)
+            navigationService.push(firstScreen().navigationBar(title: "Second"))
         }
         .gesture(
             DragGesture()
@@ -62,6 +58,22 @@ public struct NavigationView<Content>: View where Content: View {
     }
 
     // MARK: - Views
+
+    @ViewBuilder
+    private func view(forItem item: TestModel) -> some View {
+        let isLast = navigationService.stack.isLast(forId: item.id)
+        if isLast {
+            item.view.value.1
+                .fullScreen()
+                .offset(x: navigationService.offset)
+            item.view.value.0
+        } else {
+            item.view.value.1
+                .fullScreen()
+                .overlay(overlay(isLast: isLast), alignment: .center)
+            item.view.value.0
+        }
+    }
 
     private func overlay(isLast: Bool) -> AnyView? {
         guard navigationService.stack.count > 1 else { return nil }

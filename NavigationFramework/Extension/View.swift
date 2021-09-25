@@ -19,4 +19,13 @@ extension View {
             )
             .background(Color.white)
     }
+
+}
+
+public extension View {
+    @ViewBuilder
+    func navigationBar(title: String) -> TupleView<(NavigationBarView, AnyView)> {
+        NavigationBarView(text: title)
+        AnyView(self)
+    }
 }

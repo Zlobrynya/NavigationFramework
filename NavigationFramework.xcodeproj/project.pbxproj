@@ -21,6 +21,8 @@
 		81D5094A26E38CF0001D4973 /* NavigationFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 81D5091426E3867B001D4973 /* NavigationFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		81D5095026E390D6001D4973 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5094F26E390D6001D4973 /* View.swift */; };
 		81D5095226E3932E001D4973 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5095126E3932E001D4973 /* Array.swift */; };
+		81F1669A26EB9E7000D04382 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F1669926EB9E7000D04382 /* NavigationBarView.swift */; };
+		81F1669F26EBB8C200D04382 /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F1669E26EBB8C200D04382 /* TestAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		81D5094626E3876B001D4973 /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		81D5094F26E390D6001D4973 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		81D5095126E3932E001D4973 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		81F1669926EB9E7000D04382 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		81F1669E26EBB8C200D04382 /* TestAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 				81D5094E26E390C7001D4973 /* Extension */,
 				81D5094526E38753001D4973 /* Services */,
 				81D5094026E38709001D4973 /* Views */,
+				81F1669B26EB9F0700D04382 /* Modifers */,
 				81D5091726E3867B001D4973 /* NavigationFramework.h */,
 				81D5091826E3867B001D4973 /* NavigationFramework.docc */,
 			);
@@ -162,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				81D5094326E38724001D4973 /* NavigationView.swift */,
+				81F1669926EB9E7000D04382 /* NavigationBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +194,14 @@
 				81D5095126E3932E001D4973 /* Array.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		81F1669B26EB9F0700D04382 /* Modifers */ = {
+			isa = PBXGroup;
+			children = (
+				81F1669E26EBB8C200D04382 /* TestAnimation.swift */,
+			);
+			path = Modifers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,8 +345,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81F1669F26EBB8C200D04382 /* TestAnimation.swift in Sources */,
 				81D5095026E390D6001D4973 /* View.swift in Sources */,
 				81D5095226E3932E001D4973 /* Array.swift in Sources */,
+				81F1669A26EB9E7000D04382 /* NavigationBarView.swift in Sources */,
 				81D5094426E38724001D4973 /* NavigationView.swift in Sources */,
 				81D5094726E3876B001D4973 /* NavigationService.swift in Sources */,
 				81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */,

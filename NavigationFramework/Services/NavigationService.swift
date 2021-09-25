@@ -16,6 +16,7 @@ public final class NavigationService: ObservableObject {
         didSet {
             let test = UIScreen.main.bounds.width * 0.7
             let test2 = ((offset / test) / 10)
+            print(test2)
             backgroundColor = Color.black.opacity(0.15 - test2)
         }
     }
@@ -30,13 +31,19 @@ public final class NavigationService: ObservableObject {
     // MARK: - Internal functions
     
     // MARK: - Public functions
-
-    public func push<Content>(_ content: () -> Content) where Content: View {
-        push(content())
-    }
+    
 
     public func push<Content>(_ content: Content) where Content: View {
-        stack.append(TestModel(view: AnyView(content), id: UUID()))
+        push(content.navigationBar(title: "push"))
+    }
+
+    public func push(_ content: () -> TupleView<(NavigationBarView, AnyView)>) {
+        push(content())
+    }
+    
+    public func push(_ content: TupleView<(NavigationBarView, AnyView)>) {
+        print(content)
+        stack.append(TestModel(view: content, id: UUID()))
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width
         withAnimation {
@@ -66,6 +73,6 @@ public final class NavigationService: ObservableObject {
 }
 
 struct TestModel {
-    var view: AnyView
+    var view: TupleView<(NavigationBarView, AnyView)>
     var id: UUID
 }

@@ -31,7 +31,7 @@ struct ContentView: View {
     // MARK: - Views
 
     private var newScreen: some View {
-        VStack {
+        let test = VStack {
             Text("New screen")
             Button(
                 action: { navigationService.pop() },
@@ -41,12 +41,7 @@ struct ContentView: View {
                 action: { navigationService.push(self.newScreen) },
                 label: { Text("New screen") }
             )
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        }.navigationBar(title: "new screen")
+        return test
     }
 }
