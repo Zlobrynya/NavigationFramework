@@ -16,10 +16,10 @@ public final class NavigationService: ObservableObject {
         didSet {
             let test = UIScreen.main.bounds.width * 0.7
             let test2 = ((offset / test) / 10)
-            print(test2)
             backgroundColor = Color.black.opacity(0.15 - test2)
         }
     }
+    var opacity: CGFloat { 1 - (offset / UIScreen.main.bounds.width) }
 
     var backgroundColor = Color.white
     var shouldStartGesture = false
@@ -42,7 +42,6 @@ public final class NavigationService: ObservableObject {
     }
     
     public func push(_ content: TupleView<(NavigationBarView, AnyView)>) {
-        print(content)
         stack.append(TestModel(view: content, id: UUID()))
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width

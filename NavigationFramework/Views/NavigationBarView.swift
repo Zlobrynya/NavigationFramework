@@ -9,24 +9,28 @@ import SwiftUI
 
 public struct NavigationBarView: View {
     
-    var text: String
+    @Environment(\.stylingProvider) var stylingProvider
+
+    var title: String
     
     public var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            Rectangle().fill(Color.defaultNavigationBarColor).frame(height: stylingProvider.statusBarHeight)
             HStack {
                 Spacer()
-                Text("NavigationBarView \(text)")
+                Text("\(title)")
                 Spacer()
             }
-            .frame(height: 88)
-            .background(Color.secondary)
-            Spacer()
+            .frame(height: stylingProvider.navigationBarHeight)
+            .background(Color.defaultNavigationBarColor)
+            Divider()
         }
     }
+
 }
 
 struct NavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBarView(text: "Test")
+        NavigationBarView(title: "Test")
     }
 }

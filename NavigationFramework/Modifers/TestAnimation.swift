@@ -10,7 +10,7 @@ import SwiftUI
 public struct TestViewModifier: ViewModifier {
 
     public func body(content: Content) -> some View {
-        NavigationBarView(text: "Test")
+        NavigationBarView(title: "Test")
         Text("")
     }
 }

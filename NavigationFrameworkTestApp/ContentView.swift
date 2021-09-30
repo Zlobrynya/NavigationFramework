@@ -21,27 +21,10 @@ struct ContentView: View {
             VStack {
                 Text("ContentView")
                 Button(
-                    action: { navigationService.push(newScreen) },
+                    action: { navigationService.push(NextScreen()) },
                     label: { Text("Add new screen") }
                 )
             }
         }
-    }
-
-    // MARK: - Views
-
-    private var newScreen: some View {
-        let test = VStack {
-            Text("New screen")
-            Button(
-                action: { navigationService.pop() },
-                label: { Text("Pop") }
-            )
-            Button(
-                action: { navigationService.push(self.newScreen) },
-                label: { Text("New screen") }
-            )
-        }.navigationBar(title: "new screen")
-        return test
     }
 }

@@ -25,7 +25,7 @@ extension View {
 public extension View {
     @ViewBuilder
     func navigationBar(title: String) -> TupleView<(NavigationBarView, AnyView)> {
-        NavigationBarView(text: title)
+        NavigationBarView(title: title)
         AnyView(self)
     }
 }

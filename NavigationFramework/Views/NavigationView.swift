@@ -10,6 +10,7 @@ import SwiftUI
 public struct NavigationView<Content>: View where Content: View {
 
     @EnvironmentObject var navigationService: NavigationService
+    @Environment(\.stylingProvider) var stylingProvider
 
     // MARK: - Private properties
 
@@ -62,22 +63,42 @@ public struct NavigationView<Content>: View where Content: View {
     @ViewBuilder
     private func view(forItem item: TestModel) -> some View {
         let isLast = navigationService.stack.isLast(forId: item.id)
-        if isLast {
-            item.view.value.1
-                .fullScreen()
-                .offset(x: navigationService.offset)
-            item.view.value.0
-        } else {
-            item.view.value.1
-                .fullScreen()
-                .overlay(overlay(isLast: isLast), alignment: .center)
-            item.view.value.0
+        item.view.value.1
+            .fullScreen()
+            .testS(isLast: isLast, withOffset: navigationService.offset)
+            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+        VStack {
+            item.view.value.0.testN(isLast: isLast, withOpacity: navigationService.opacity)
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    private func lastView(_ view: TupleView<(NavigationBarView, AnyView)>) -> some View {
+        view.value.1
+            .fullScreen()
+            .offset(x: navigationService.offset)
+            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+        VStack {
+            view.value.0.opacity(navigationService.opacity)
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    private func previousView(_ view: TupleView<(NavigationBarView, AnyView)>) -> some View {
+        view.value.1
+            .fullScreen()
+            .overlay(overlayPreviousScreens)
+            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+        VStack {
+            view.value.0
+            Spacer()
         }
     }
 
-    private func overlay(isLast: Bool) -> AnyView? {
+    private var overlayPreviousScreens: AnyView? {
         guard navigationService.stack.count > 1 else { return nil }
-        guard !isLast else { return nil }
         return AnyView(navigationService.backgroundColor)
     }
 }
@@ -89,5 +110,26 @@ struct NavigationView_Previews: PreviewProvider {
         }
         .edgesIgnoringSafeArea(.all)
         .environmentObject(NavigationService())
+    }
+}
+
+extension View {
+    
+    @ViewBuilder
+    func testS(isLast: Bool, withOffset offset: CGFloat) -> some View {
+        if isLast {
+            self.offset(x: offset)
+        } else {
+            self.overlay(Color.red)
+        }
+    }
+    
+    @ViewBuilder
+    func testN(isLast: Bool, withOpacity opacity: CGFloat) -> some View {
+        if isLast {
+            self.opacity(opacity)
+        } else {
+            self
+        }
     }
 }
