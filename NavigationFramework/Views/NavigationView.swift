@@ -65,34 +65,11 @@ public struct NavigationView<Content>: View where Content: View {
         let isLast = navigationService.stack.isLast(forId: item.id)
         item.view.value.1
             .fullScreen()
-            .testS(isLast: isLast, withOffset: navigationService.offset)
+            .offset(x: isLast ? navigationService.offset : 0)
+            .overlay(isLast ? nil : overlayPreviousScreens)
             .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
         VStack {
-            item.view.value.0.testN(isLast: isLast, withOpacity: navigationService.opacity)
-            Spacer()
-        }
-    }
-    
-    @ViewBuilder
-    private func lastView(_ view: TupleView<(NavigationBarView, AnyView)>) -> some View {
-        view.value.1
-            .fullScreen()
-            .offset(x: navigationService.offset)
-            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
-        VStack {
-            view.value.0.opacity(navigationService.opacity)
-            Spacer()
-        }
-    }
-    
-    @ViewBuilder
-    private func previousView(_ view: TupleView<(NavigationBarView, AnyView)>) -> some View {
-        view.value.1
-            .fullScreen()
-            .overlay(overlayPreviousScreens)
-            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
-        VStack {
-            view.value.0
+            item.view.value.0.opacity(isLast ? navigationService.opacity : 1)
             Spacer()
         }
     }
@@ -110,26 +87,5 @@ struct NavigationView_Previews: PreviewProvider {
         }
         .edgesIgnoringSafeArea(.all)
         .environmentObject(NavigationService())
-    }
-}
-
-extension View {
-    
-    @ViewBuilder
-    func testS(isLast: Bool, withOffset offset: CGFloat) -> some View {
-        if isLast {
-            self.offset(x: offset)
-        } else {
-            self.overlay(Color.red)
-        }
-    }
-    
-    @ViewBuilder
-    func testN(isLast: Bool, withOpacity opacity: CGFloat) -> some View {
-        if isLast {
-            self.opacity(opacity)
-        } else {
-            self
-        }
     }
 }
