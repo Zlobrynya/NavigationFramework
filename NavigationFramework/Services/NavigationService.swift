@@ -19,6 +19,7 @@ public final class NavigationService: ObservableObject {
             backgroundColor = Color.black.opacity(0.15 - test2)
         }
     }
+
     var opacity: CGFloat { 1 - (offset / UIScreen.main.bounds.width) }
 
     var backgroundColor = Color.white

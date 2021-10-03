@@ -8,7 +8,5 @@
 import SwiftUI
 
 extension EnvironmentValues {
-  var stylingProvider: StylingProviderProtocol {
-      get { self[StylingProviderKey.self] }
-  }
+    var stylingProvider: StylingProviderProtocol { self[StylingProviderKey.self] }
 }

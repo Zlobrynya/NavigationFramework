@@ -14,6 +14,8 @@
 		8138711627058EEA00BE1D7E /* StylingProviderKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138711527058EEA00BE1D7E /* StylingProviderKey.swift */; };
 		8138711A27058F1F00BE1D7E /* EnvironmentValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138711927058F1F00BE1D7E /* EnvironmentValues.swift */; };
 		8138711E2705941C00BE1D7E /* NextScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138711D2705941C00BE1D7E /* NextScreen.swift */; };
+		813EB04D270A180B00CFBDC1 /* DiContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EB04C270A180A00CFBDC1 /* DiContainer.swift */; };
+		813EB050270A18B200CFBDC1 /* NavigationService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EB04F270A18B200CFBDC1 /* NavigationService2.swift */; };
 		81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */ = {isa = PBXBuildFile; fileRef = 81D5091826E3867B001D4973 /* NavigationFramework.docc */; };
 		81D5091F26E3867B001D4973 /* NavigationFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D5091426E3867B001D4973 /* NavigationFramework.framework */; };
 		81D5092426E3867B001D4973 /* NavigationFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5092326E3867B001D4973 /* NavigationFrameworkTests.swift */; };
@@ -71,6 +73,8 @@
 		8138711527058EEA00BE1D7E /* StylingProviderKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylingProviderKey.swift; sourceTree = "<group>"; };
 		8138711927058F1F00BE1D7E /* EnvironmentValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentValues.swift; sourceTree = "<group>"; };
 		8138711D2705941C00BE1D7E /* NextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextScreen.swift; sourceTree = "<group>"; };
+		813EB04C270A180A00CFBDC1 /* DiContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiContainer.swift; sourceTree = "<group>"; };
+		813EB04F270A18B200CFBDC1 /* NavigationService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService2.swift; sourceTree = "<group>"; };
 		81D5091426E3867B001D4973 /* NavigationFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NavigationFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81D5091726E3867B001D4973 /* NavigationFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationFramework.h; sourceTree = "<group>"; };
 		81D5091826E3867B001D4973 /* NavigationFramework.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = NavigationFramework.docc; sourceTree = "<group>"; };
@@ -144,6 +148,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		813EB04E270A18AA00CFBDC1 /* NavigationService2 */ = {
+			isa = PBXGroup;
+			children = (
+				813EB04F270A18B200CFBDC1 /* NavigationService2.swift */,
+			);
+			path = NavigationService2;
+			sourceTree = "<group>";
+		};
 		81D5090A26E3867B001D4973 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +180,7 @@
 		81D5091626E3867B001D4973 /* NavigationFramework */ = {
 			isa = PBXGroup;
 			children = (
+				813EB04C270A180A00CFBDC1 /* DiContainer.swift */,
 				81D5094E26E390C7001D4973 /* Extension */,
 				81D5094526E38753001D4973 /* Services */,
 				81D5094026E38709001D4973 /* Views */,
@@ -219,6 +232,7 @@
 		81D5094526E38753001D4973 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				813EB04E270A18AA00CFBDC1 /* NavigationService2 */,
 				8138711427058EDE00BE1D7E /* StylingProvider */,
 				81D5094626E3876B001D4973 /* NavigationService.swift */,
 			);
@@ -401,7 +415,9 @@
 				8138711A27058F1F00BE1D7E /* EnvironmentValues.swift in Sources */,
 				8138710D2700767E00BE1D7E /* Color.swift in Sources */,
 				81D5094726E3876B001D4973 /* NavigationService.swift in Sources */,
+				813EB04D270A180B00CFBDC1 /* DiContainer.swift in Sources */,
 				81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */,
+				813EB050270A18B200CFBDC1 /* NavigationService2.swift in Sources */,
 				8138711327058EAF00BE1D7E /* StylingProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@ public struct NavigationView<Content>: View where Content: View {
 
     @EnvironmentObject var navigationService: NavigationService
     @Environment(\.stylingProvider) var stylingProvider
-
+    
     // MARK: - Private properties
 
     @ViewBuilder private var firstScreen: () -> Content
@@ -24,8 +24,8 @@ public struct NavigationView<Content>: View where Content: View {
 
     public var body: some View {
         ZStack {
-            ForEach(navigationService.stack, id: \.id) {
-                view(forItem: $0)
+            ForEach(Array(navigationService.stack.enumerated()), id: \.offset) { index, element in
+                view(forItem: element, withIndex: index)
             }
         }
         .fullScreen()
@@ -61,7 +61,7 @@ public struct NavigationView<Content>: View where Content: View {
     // MARK: - Views
 
     @ViewBuilder
-    private func view(forItem item: TestModel) -> some View {
+    private func view(forItem item: TestModel, withIndex index: Int) -> some View {
         let isLast = navigationService.stack.isLast(forId: item.id)
         item.view.value.1
             .fullScreen()

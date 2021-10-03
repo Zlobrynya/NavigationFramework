@@ -20,6 +20,10 @@ extension View {
             .background(Color.white)
     }
 
+    
+    func asAnyView() -> AnyView {
+        AnyView(self)
+    }
 }
 
 public extension View {
