@@ -1,17 +1,17 @@
 //
-//  NavigationService.swift
-//  NavigationService
+//  NavigationViewModel.swift
+//  NavigationFramework
 //
 //  Created by Nikita Nikitin on 04.09.2021.
 //
 
 import SwiftUI
 
-public final class NavigationService: ObservableObject {
+public final class NavigationViewModel: ObservableObject, NavigationObserver {
 
     // MARK: - Internal properties
 
-    @Published var stack: [TestModel] = []
+    @Published var stack: [Any] = []
     @Published var offset: CGFloat = 0 {
         didSet {
             let test = UIScreen.main.bounds.width * 0.7
@@ -28,28 +28,48 @@ public final class NavigationService: ObservableObject {
     // MARK: - Lifecycle
 
     public init() {}
-    
+
     // MARK: - Internal functions
-    
+
+    func onAppear() {
+        DiContainer.eventsManager.addObserver(self)
+    }
+
+    func onDisappear() {
+        DiContainer.eventsManager.removeObserver(self)
+    }
+
     // MARK: - Public functions
-    
 
-    public func push<Content>(_ content: Content) where Content: View {
-        push(content.navigationBar(title: "push"))
-    }
-
-    public func push(_ content: () -> TupleView<(NavigationBarView, AnyView)>) {
-        push(content())
-    }
+//    public func push<Content>(_ content: Content) where Content: View {
+//        push(content.navigationBar(title: "push"))
+//    }
+//
+//    public func push(_ content: () -> TupleView<(NavigationBarView, AnyView)>) {
+//        push(content())
+//    }
+//
     
-    public func push(_ content: TupleView<(NavigationBarView, AnyView)>) {
-        stack.append(TestModel(view: content, id: UUID()))
+    func push<Content>(_ content: Content) where Content: TestView {
+        let test = TestModel(view: content, id: UUID())
+        stack.append(test)
+        print("🔵 \(type(of: test))")
+        print("🔵 \(stack)")
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width
         withAnimation {
             self.offset = 0
         }
     }
+//    func push<Content>(_ content: @escaping () -> Content) where Content: View {
+//        print(type(of: content))
+//        stack.append(TestModel(view: content as! () -> (TupleView<(NavigationBarView, AnyView)>), id: UUID()))
+//        guard stack.count > 1 else { return }
+//        offset = UIScreen.main.bounds.width
+//        withAnimation {
+//            self.offset = 0
+//        }
+//    }
 
     public func pop() {
         guard stack.count > 1 else { return }
@@ -57,7 +77,7 @@ public final class NavigationService: ObservableObject {
             self.stack.removeLast()
         }
     }
-    
+
     // MARK: - Private functions
 
     private func animationPop(complited: @escaping () -> Void) {
@@ -72,7 +92,7 @@ public final class NavigationService: ObservableObject {
     }
 }
 
-struct TestModel {
-    var view: TupleView<(NavigationBarView, AnyView)>
+struct TestModel<Content: TestView> {
+    var view: Content
     var id: UUID
 }

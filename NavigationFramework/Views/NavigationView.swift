@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public struct NavigationView<Content>: View where Content: View {
+public struct CNavigationView<Content>: View where Content: TestView {
 
-    @EnvironmentObject var navigationService: NavigationService
+    @EnvironmentObject var navigationService: NavigationViewModel
     @Environment(\.stylingProvider) var stylingProvider
     
     // MARK: - Private properties
@@ -30,7 +30,11 @@ public struct NavigationView<Content>: View where Content: View {
         }
         .fullScreen()
         .onAppear {
-            navigationService.push(firstScreen().navigationBar(title: "Second"))
+            navigationService.onAppear()
+            navigationService.push(firstScreen())
+        }
+        .onDisappear {
+            navigationService.onDisappear()
         }
         .gesture(
             DragGesture()
@@ -61,15 +65,16 @@ public struct NavigationView<Content>: View where Content: View {
     // MARK: - Views
 
     @ViewBuilder
-    private func view(forItem item: TestModel, withIndex index: Int) -> some View {
-        let isLast = navigationService.stack.isLast(forId: item.id)
-        item.view.value.1
-            .fullScreen()
+    private func view(forItem item: Any, withIndex index: Int) -> some View {
+        let item = item as! TestModel<Content>
+        let isLast = true //navigationService.stack.isLast(forId: item.id)
+        item.view.fullScreen()
             .offset(x: isLast ? navigationService.offset : 0)
             .overlay(isLast ? nil : overlayPreviousScreens)
             .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
         VStack {
-            item.view.value.0.opacity(isLast ? navigationService.opacity : 1)
+//            view.na.opacity(isLast ? navigationService.opacity : 1)
+            item.view.navigationBar
             Spacer()
         }
     }
@@ -80,12 +85,14 @@ public struct NavigationView<Content>: View where Content: View {
     }
 }
 
-struct NavigationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            Text("Test")
-        }
-        .edgesIgnoringSafeArea(.all)
-        .environmentObject(NavigationService())
-    }
-}
+//struct NavigationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            Text("Test")
+//        }
+//        .edgesIgnoringSafeArea(.all)
+//        .environmentObject(NavigationViewModel())
+//    }
+//
+//    struct Test
+//}

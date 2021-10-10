@@ -8,23 +8,25 @@
 import NavigationFramework
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: TestView {
+    var navigationBar: NavigationBarView {
+        NavigationBarView(title: "test")
+    }
 
     // MARK: - Public properties
 
-    @EnvironmentObject var navigationService: NavigationService
+    @Environment(\.navigationService) var navigationService
+//    @EnvironmentObject var navigationService: NavigationViewModel
 
     // MARK: - Body
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("ContentView")
-                Button(
-                    action: { navigationService.push(NextScreen()) },
-                    label: { Text("Add new screen") }
-                )
-            }
+        VStack {
+            Text("ContentView")
+            Button(
+                action: { navigationService.push(NextScreen()) },
+                label: { Text("Add new screen") }
+            )
         }
     }
 }

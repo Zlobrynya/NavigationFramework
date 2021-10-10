@@ -8,8 +8,10 @@
 import SwiftUI
 import NavigationFramework
 
-struct NextScreen: View {
-    @EnvironmentObject var navigationService: NavigationService
+struct NextScreen: TestView {
+    
+    @Environment(\.navigationService) var navigationService
+
     @State var count = 0
 
     var body: some View {
@@ -25,6 +27,10 @@ struct NextScreen: View {
             )
             Button(action: { count += 1 }, label: { Text("New screen") })
         }.navigationBar(title: "new screen")
+    }
+    
+    var navigationBar: NavigationBarView {
+        NavigationBarView(title: "")
     }
 }
 

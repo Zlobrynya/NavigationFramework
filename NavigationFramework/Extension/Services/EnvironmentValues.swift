@@ -9,4 +9,6 @@ import SwiftUI
 
 extension EnvironmentValues {
     var stylingProvider: StylingProviderProtocol { self[StylingProviderKey.self] }
+    
+    public var navigationService: NavigationService { self[NavigationServiceKey.self] }
 }

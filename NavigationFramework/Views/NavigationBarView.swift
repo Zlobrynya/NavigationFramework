@@ -16,6 +16,7 @@ public struct NavigationBarView: View {
     // MARK: - External Dependencies
 
     @Environment(\.stylingProvider) var stylingProvider
+    @Environment(\.navigationService) var navigationService
 
     var title: String
     var tralingBarButton: (() -> AnyView)?
@@ -23,7 +24,7 @@ public struct NavigationBarView: View {
 
     // MARK: - Lifecycle
 
-    init(title: String) {
+    public init(title: String) {
         self.title = title
     }
 
@@ -88,7 +89,7 @@ public struct NavigationBarView: View {
 //        guard stackCountKey > 1 else { return nil }
         return Button(
             action: {
-//                navigationService.pop()
+                navigationService.pop()
             },
             label: {
                 Image(systemName: "chevron.left")
