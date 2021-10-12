@@ -10,12 +10,14 @@ import SwiftUI
 public struct NavigationBarView: View {
 
     // MARK: - Private properties
-    
+
     @State private var isShowBackButton = false
 
     // MARK: - External Dependencies
 
     @Environment(\.stylingProvider) var stylingProvider
+    @Environment(\.navigationService) var navigationService
+    @Environment(\.navigationStackCount) var navigationStackCount
 
     var title: String
     var tralingBarButton: (() -> AnyView)?
@@ -23,11 +25,11 @@ public struct NavigationBarView: View {
 
     // MARK: - Lifecycle
 
-    init(title: String) {
+    public init(title: String) {
         self.title = title
     }
 
-    init<TrailingContent>(
+    public init<TrailingContent>(
         title: String,
         tralingBarButton: @escaping () -> TrailingContent
     ) where TrailingContent: View {
@@ -35,7 +37,7 @@ public struct NavigationBarView: View {
         self.tralingBarButton = { tralingBarButton().asAnyView() }
     }
 
-    init<LeadingContent>(
+    public init<LeadingContent>(
         title: String,
         leadingBarButton: @escaping () -> LeadingContent
     ) where LeadingContent: View {
@@ -43,7 +45,7 @@ public struct NavigationBarView: View {
         self.leadingBarButton = { leadingBarButton().asAnyView() }
     }
 
-    init<TrailingContent, LeadingContent>(
+    public init<TrailingContent, LeadingContent>(
         title: String,
         tralingBarButton: @escaping () -> TrailingContent,
         leadingBarButton: @escaping () -> LeadingContent
@@ -81,15 +83,13 @@ public struct NavigationBarView: View {
         .frame(height: stylingProvider.navigationBarHeight)
         .background(Color.defaultNavigationBarColor)
     }
-    
+
     // MARK: - Optional views
 
     private var backButton: AnyView? {
-//        guard stackCountKey > 1 else { return nil }
+        guard navigationStackCount.count > 1 else { return nil }
         return Button(
-            action: {
-//                navigationService.pop()
-            },
+            action: { navigationService.pop() },
             label: {
                 Image(systemName: "chevron.left")
                     .resizable()

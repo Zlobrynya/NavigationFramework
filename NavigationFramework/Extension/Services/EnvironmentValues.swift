@@ -7,6 +7,15 @@
 
 import SwiftUI
 
-extension EnvironmentValues {
-    var stylingProvider: StylingProviderProtocol { self[StylingProviderKey.self] }
+public extension EnvironmentValues {
+
+    // MARK: - Public properties
+
+    var navigationService: NavigationService { self[NavigationServiceKey.self] }
+
+    // MARK: - Internal properties
+
+    internal var stylingProvider: StylingProviderProtocol { self[StylingProviderKey.self] }
+
+    internal var navigationStackCount: NavigationStackCount { self[NavigationStackCountKey.self] }
 }

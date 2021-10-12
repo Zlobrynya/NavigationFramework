@@ -5,8 +5,8 @@
 //  Created by Nikita Nikitin on 03.10.2021.
 //
 
-import Foundation
+import SwiftUI
 
 enum DiContainer {
-    static let navigationService: String = ""
+    static let eventsManager: EventsManagerProtocol = EventsManager()
 }

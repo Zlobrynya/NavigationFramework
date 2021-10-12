@@ -5,11 +5,13 @@
 //  Created by Nikita Nikitin on 30.09.2021.
 //
 
-import SwiftUI
 import NavigationFramework
+import SwiftUI
 
-struct NextScreen: View {
-    @EnvironmentObject var navigationService: NavigationService
+struct NextScreen: NavigationViewProtocol {
+
+    @Environment(\.navigationService) var navigationService
+
     @State var count = 0
 
     var body: some View {
@@ -23,8 +25,12 @@ struct NextScreen: View {
                 action: { navigationService.push(NextScreen()) },
                 label: { Text("New screen") }
             )
-            Button(action: { count += 1 }, label: { Text("New screen") })
+            Button(action: { count += 1 }, label: { Text("Count") })
         }.navigationBar(title: "new screen")
+    }
+
+    var navigationBar: NavigationBarView {
+        NavigationBarView(title: "TESTTTTEE")
     }
 }
 
