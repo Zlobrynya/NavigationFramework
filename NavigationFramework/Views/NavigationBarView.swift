@@ -10,7 +10,7 @@ import SwiftUI
 public struct NavigationBarView: View {
 
     // MARK: - Private properties
-    
+
     @State private var isShowBackButton = false
 
     // MARK: - External Dependencies
@@ -82,11 +82,11 @@ public struct NavigationBarView: View {
         .frame(height: stylingProvider.navigationBarHeight)
         .background(Color.defaultNavigationBarColor)
     }
-    
+
     // MARK: - Optional views
 
     private var backButton: AnyView? {
-//        guard stackCountKey > 1 else { return nil }
+        guard navigationService.test != 0 else { return nil }
         return Button(
             action: {
                 navigationService.pop()

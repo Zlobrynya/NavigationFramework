@@ -30,7 +30,7 @@ struct NextScreen: TestView {
     }
     
     var navigationBar: NavigationBarView {
-        NavigationBarView(title: "")
+        NavigationBarView(title: "TESTTTTEE")
     }
 }
 

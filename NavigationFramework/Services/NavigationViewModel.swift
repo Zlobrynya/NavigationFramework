@@ -11,7 +11,7 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
 
     // MARK: - Internal properties
 
-    @Published var stack: [Any] = []
+    @Published var stack: [TestModel] = []
     @Published var offset: CGFloat = 0 {
         didSet {
             let test = UIScreen.main.bounds.width * 0.7
@@ -21,7 +21,6 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
     }
 
     var opacity: CGFloat { 1 - (offset / UIScreen.main.bounds.width) }
-
     var backgroundColor = Color.white
     var shouldStartGesture = false
 
@@ -41,19 +40,11 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
 
     // MARK: - Public functions
 
-//    public func push<Content>(_ content: Content) where Content: View {
-//        push(content.navigationBar(title: "push"))
-//    }
-//
-//    public func push(_ content: () -> TupleView<(NavigationBarView, AnyView)>) {
-//        push(content())
-//    }
-//
-    
     func push<Content>(_ content: Content) where Content: TestView {
-        let test = TestModel(view: content, id: UUID())
+
+        let test = TestModel(view: content.asAnyView(), navigationBar: content.navigationBar, id: UUID())
         stack.append(test)
-        print("🔵 \(type(of: test))")
+
         print("🔵 \(stack)")
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width
@@ -61,15 +52,6 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
             self.offset = 0
         }
     }
-//    func push<Content>(_ content: @escaping () -> Content) where Content: View {
-//        print(type(of: content))
-//        stack.append(TestModel(view: content as! () -> (TupleView<(NavigationBarView, AnyView)>), id: UUID()))
-//        guard stack.count > 1 else { return }
-//        offset = UIScreen.main.bounds.width
-//        withAnimation {
-//            self.offset = 0
-//        }
-//    }
 
     public func pop() {
         guard stack.count > 1 else { return }
@@ -92,7 +74,8 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
     }
 }
 
-struct TestModel<Content: TestView> {
-    var view: Content
+struct TestModel {
+    var view: AnyView
+    var navigationBar: NavigationBarView
     var id: UUID
 }

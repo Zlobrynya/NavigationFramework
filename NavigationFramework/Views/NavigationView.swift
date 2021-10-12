@@ -65,16 +65,14 @@ public struct CNavigationView<Content>: View where Content: TestView {
     // MARK: - Views
 
     @ViewBuilder
-    private func view(forItem item: Any, withIndex index: Int) -> some View {
-        let item = item as! TestModel<Content>
-        let isLast = true //navigationService.stack.isLast(forId: item.id)
+    private func view(forItem item: TestModel, withIndex index: Int) -> some View {
+        let isLast = navigationService.stack.isLast(forId: item.id)
         item.view.fullScreen()
             .offset(x: isLast ? navigationService.offset : 0)
             .overlay(isLast ? nil : overlayPreviousScreens)
             .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
         VStack {
-//            view.na.opacity(isLast ? navigationService.opacity : 1)
-            item.view.navigationBar
+            item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
             Spacer()
         }
     }

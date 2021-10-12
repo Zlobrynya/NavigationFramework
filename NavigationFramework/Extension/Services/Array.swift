@@ -7,9 +7,9 @@
 
 import Foundation
 
-//extension Array where Array.Element == TestModel {
-//    func isLast(forId id: UUID) -> Bool {
-//        guard let last = self.last else { return false }
-//        return last.id == id
-//    }
-//}
+extension Array where Array.Element == TestModel {
+    func isLast(forId id: UUID) -> Bool {
+        guard let last = self.last else { return false }
+        return last.id == id
+    }
+}

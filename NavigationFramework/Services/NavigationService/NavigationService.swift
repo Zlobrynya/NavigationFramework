@@ -9,6 +9,8 @@ import SwiftUI
 
 public final class NavigationService {
 
+    public var test: Int = 0
+    
     // MARK: - External Dependencies
 
     private let eventsManager: EventsManagerProtocol
@@ -22,18 +24,12 @@ public final class NavigationService {
     // MARK: - Public functions
 
     public func push<Content>(_ content: Content) where Content: TestView {
-//        if content.body is TupleView<(NavigationBarView, AnyView)> {
         eventsManager.push(content)
-//        } else {
-//            push(content.navigationBar(title: ""))
-//        }
+        test += 1
     }
-
-//    public func push(_ content: TupleView<(NavigationBarView, AnyView)>) {
-//        eventsManager.push { content }
-//    }
-
+    
     public func pop() {
         eventsManager.pop()
+        test -= 1
     }
 }
