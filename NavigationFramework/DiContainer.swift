@@ -10,7 +10,3 @@ import SwiftUI
 enum DiContainer {
     static let eventsManager: EventsManagerProtocol = EventsManager()
 }
-
-public protocol TestView: View {
-    var navigationBar: NavigationBarView { get }
-}

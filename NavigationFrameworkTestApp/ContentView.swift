@@ -8,15 +8,11 @@
 import NavigationFramework
 import SwiftUI
 
-struct ContentView: TestView {
-    var navigationBar: NavigationBarView {
-        NavigationBarView(title: "test")
-    }
+struct ContentView: NavigationViewProtocol {
 
     // MARK: - Public properties
 
     @Environment(\.navigationService) var navigationService
-//    @EnvironmentObject var navigationService: NavigationViewModel
 
     // MARK: - Body
 
@@ -28,5 +24,9 @@ struct ContentView: TestView {
                 label: { Text("Add new screen") }
             )
         }
+    }
+    
+    var navigationBar: NavigationBarView {
+        NavigationBarView(title: "test")
     }
 }

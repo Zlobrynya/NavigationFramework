@@ -7,16 +7,19 @@
 
 import SwiftUI
 
-public final class NavigationViewModel: ObservableObject, NavigationObserver {
+final class NavigationViewModel: ObservableObject, NavigationObserver {
 
-    // MARK: - Internal properties
+    // MARK: - Public properties
 
-    @Published var stack: [TestModel] = []
+    @Published var stack: [NavigationDataProtocol] = [] {
+        didSet { navigationStackCount.updateValue(stack.count) }
+    }
+
     @Published var offset: CGFloat = 0 {
         didSet {
-            let test = UIScreen.main.bounds.width * 0.7
-            let test2 = ((offset / test) / 10)
-            backgroundColor = Color.black.opacity(0.15 - test2)
+            let bounds = UIScreen.main.bounds.width * 0.7
+            let calculatedTransparency = ((offset / bounds) / 10)
+            backgroundColor = Color.black.opacity(0.15 - calculatedTransparency)
         }
     }
 
@@ -24,28 +27,31 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
     var backgroundColor = Color.white
     var shouldStartGesture = false
 
+    // MARK: - External Dependencies
+
+    @Environment(\.navigationStackCount) var navigationStackCount
+    private var eventsManager: EventsManagerProtocol
+
     // MARK: - Lifecycle
 
-    public init() {}
+    init(eventsManager: EventsManagerProtocol = DiContainer.eventsManager) {
+        self.eventsManager = eventsManager
+    }
 
-    // MARK: - Internal functions
-
-    func onAppear() {
-        DiContainer.eventsManager.addObserver(self)
+    func onAppear<Content>(with firstScreen: Content) where Content: NavigationViewProtocol {
+        eventsManager.addObserver(self)
+        push(firstScreen)
     }
 
     func onDisappear() {
-        DiContainer.eventsManager.removeObserver(self)
+        eventsManager.removeObserver(self)
     }
 
     // MARK: - Public functions
 
-    func push<Content>(_ content: Content) where Content: TestView {
-
-        let test = TestModel(view: content.asAnyView(), navigationBar: content.navigationBar, id: UUID())
-        stack.append(test)
-
-        print("🔵 \(stack)")
+    func push<Content>(_ content: Content) where Content: NavigationViewProtocol {
+        let content = NavigationData(view: content.asAnyView(), navigationBar: content.navigationBar, id: UUID())
+        stack.append(content)
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width
         withAnimation {
@@ -72,10 +78,4 @@ public final class NavigationViewModel: ObservableObject, NavigationObserver {
             self.offset = 0
         }
     }
-}
-
-struct TestModel {
-    var view: AnyView
-    var navigationBar: NavigationBarView
-    var id: UUID
 }

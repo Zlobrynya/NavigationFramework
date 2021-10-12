@@ -8,8 +8,6 @@
 import SwiftUI
 
 public final class NavigationService {
-
-    public var test: Int = 0
     
     // MARK: - External Dependencies
 
@@ -23,13 +21,11 @@ public final class NavigationService {
 
     // MARK: - Public functions
 
-    public func push<Content>(_ content: Content) where Content: TestView {
+    public func push<Content>(_ content: Content) where Content: NavigationViewProtocol {
         eventsManager.push(content)
-        test += 1
     }
     
     public func pop() {
         eventsManager.pop()
-        test -= 1
     }
 }

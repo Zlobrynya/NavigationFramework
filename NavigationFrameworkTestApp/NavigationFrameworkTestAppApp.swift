@@ -12,9 +12,9 @@ import SwiftUI
 struct NavigationFrameworkTestAppApp: App {
     var body: some Scene {
         WindowGroup {
-            CNavigationView {
+            CustomNavigationView {
                 ContentView()
-            }.environmentObject(NavigationViewModel())
+            }
         }
     }
 }

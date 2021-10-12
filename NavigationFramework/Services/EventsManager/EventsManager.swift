@@ -12,7 +12,7 @@ protocol EventObserverProtocol: AnyObject {}
 
 protocol NavigationObserver: EventObserverProtocol {
     func pop()
-    func push<Content>(_ content: Content) where Content: TestView
+    func push<Content>(_ content: Content) where Content: NavigationViewProtocol
 }
 
 protocol EventsManagerProtocol: NavigationObserver {
@@ -60,7 +60,7 @@ final class EventsManager: EventsManagerProtocol {
         }
     }
     
-    func push<Content>(_ content: Content) where Content: TestView {
+    func push<Content>(_ content: Content) where Content: NavigationViewProtocol {
         observersAccessQueue.sync {
             observersTable.allObjects
                 .compactMap { $0 as? NavigationObserver }

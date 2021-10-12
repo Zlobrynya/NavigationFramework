@@ -1,5 +1,5 @@
 //
-//  NavigationView.swift
+//  CustomNavigationView.swift
 //  NavigationView
 //
 //  Created by Nikita Nikitin on 04.09.2021.
@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-public struct CNavigationView<Content>: View where Content: TestView {
+public struct CustomNavigationView<Content>: View where Content: NavigationViewProtocol {
 
-    @EnvironmentObject var navigationService: NavigationViewModel
+    // MARK: - External Dependencies
+
+    @StateObject var navigationService = NavigationViewModel()
     @Environment(\.stylingProvider) var stylingProvider
-    
-    // MARK: - Private properties
-
     @ViewBuilder private var firstScreen: () -> Content
 
     // MARK: - Lifecycle
@@ -21,6 +20,8 @@ public struct CNavigationView<Content>: View where Content: TestView {
     public init(firstScreen: @escaping () -> Content) {
         self.firstScreen = firstScreen
     }
+
+    // MARK: - Body
 
     public var body: some View {
         ZStack {
@@ -30,8 +31,7 @@ public struct CNavigationView<Content>: View where Content: TestView {
         }
         .fullScreen()
         .onAppear {
-            navigationService.onAppear()
-            navigationService.push(firstScreen())
+            navigationService.onAppear(with: firstScreen())
         }
         .onDisappear {
             navigationService.onDisappear()
@@ -65,7 +65,7 @@ public struct CNavigationView<Content>: View where Content: TestView {
     // MARK: - Views
 
     @ViewBuilder
-    private func view(forItem item: TestModel, withIndex index: Int) -> some View {
+    private func view(forItem item: NavigationDataProtocol, withIndex index: Int) -> some View {
         let isLast = navigationService.stack.isLast(forId: item.id)
         item.view.fullScreen()
             .offset(x: isLast ? navigationService.offset : 0)
@@ -83,14 +83,21 @@ public struct CNavigationView<Content>: View where Content: TestView {
     }
 }
 
-//struct NavigationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            Text("Test")
-//        }
-//        .edgesIgnoringSafeArea(.all)
-//        .environmentObject(NavigationViewModel())
-//    }
-//
-//    struct Test
-//}
+struct NavigationView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            Test()
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+
+    struct Test: NavigationViewProtocol {
+        var body: some View {
+            Text("Test")
+        }
+
+        var navigationBar: NavigationBarView {
+            NavigationBarView(title: "")
+        }
+    }
+}
