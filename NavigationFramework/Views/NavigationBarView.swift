@@ -18,6 +18,7 @@ public struct NavigationBarView: View {
     @Environment(\.stylingProvider) var stylingProvider
     @Environment(\.navigationService) var navigationService
     @Environment(\.navigationStackCount) var navigationStackCount
+    @Environment(\.navigationBarSetting) var navigationBarSetting
 
     var title: String
     var tralingBarButton: (() -> AnyView)?
@@ -47,8 +48,8 @@ public struct NavigationBarView: View {
 
     public init<TrailingContent, LeadingContent>(
         title: String,
-        tralingBarButton: @escaping () -> TrailingContent,
-        leadingBarButton: @escaping () -> LeadingContent
+        leadingBarButton: @escaping () -> LeadingContent,
+        tralingBarButton: @escaping () -> TrailingContent
     ) where TrailingContent: View, LeadingContent: View {
         self.title = title
         self.tralingBarButton = { tralingBarButton().asAnyView() }
@@ -61,7 +62,7 @@ public struct NavigationBarView: View {
         VStack(spacing: 0) {
             backgoundStatusBar
             navigationBar
-            Divider()
+            divider
         }
     }
 
@@ -69,22 +70,46 @@ public struct NavigationBarView: View {
 
     private var backgoundStatusBar: some View {
         Rectangle()
-            .fill(Color.defaultNavigationBarColor)
+            .fill(navigationBarSetting.backgoundColor)
             .frame(height: stylingProvider.statusBarHeight)
     }
 
     private var navigationBar: some View {
+        ZStack(alignment: .leading) {
+            buttons
+            titleView
+        }
+        .frame(height: stylingProvider.navigationBarHeight)
+        .background(navigationBarSetting.backgoundColor)
+    }
+
+    private var titleView: some View {
         HStack {
-            backButton
             Spacer()
             Text("\(title)")
             Spacer()
         }
-        .frame(height: stylingProvider.navigationBarHeight)
-        .background(Color.defaultNavigationBarColor)
+    }
+
+    private var buttons: some View {
+        HStack(spacing: 4) {
+            backButton
+            leadingBarButton?()
+                .frame(width: stylingProvider.navigationButtonSize, height: stylingProvider.navigationButtonSize)
+                .padding(3)
+            Spacer()
+            tralingBarButton?()
+                .frame(width: stylingProvider.navigationButtonSize, height: stylingProvider.navigationButtonSize)
+                .padding(3)
+        }.padding(.horizontal, 8)
     }
 
     // MARK: - Optional views
+    
+    private var divider: AnyView? {
+        guard !navigationBarSetting.shouldHideDivider else { return nil }
+        return Divider().asAnyView()
+    }
 
     private var backButton: AnyView? {
         guard navigationStackCount.count > 1 else { return nil }
@@ -95,9 +120,10 @@ public struct NavigationBarView: View {
                     .resizable()
                     .font(.body.bold())
                     .frame(width: 12, height: 20)
-                    .padding(8)
             }
-        ).asAnyView()
+        )
+        .foregroundColor(navigationBarSetting.buttonBackColor)
+        .asAnyView()
     }
 }
 

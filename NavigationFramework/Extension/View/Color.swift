@@ -8,5 +8,6 @@
 import SwiftUI
 
 extension Color {
-    static var defaultNavigationBarColor = Color("backgroundNavigationBar", bundle: .navigationFramework)
+    public static var defaultNavigationBarColor = Color("backgroundNavigationBar", bundle: .navigationFramework)
+    public static var backgroundNavigationBack = Color("backgroundNavigationBack", bundle: .navigationFramework)
 }

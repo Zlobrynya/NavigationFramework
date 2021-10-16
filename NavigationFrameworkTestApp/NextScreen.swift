@@ -26,12 +26,16 @@ struct NextScreen: NavigationViewProtocol {
                 label: { Text("New screen") }
             )
             Button(action: { count += 1 }, label: { Text("Count") })
-        }.navigationBar(title: "new screen")
+        }
     }
 
-    var navigationBar: NavigationBarView {
-        NavigationBarView(title: "TESTTTTEE")
-    }
+    var navigationBar: () -> (NavigationBarView) {{
+        NavigationBarView(
+            title: "TESTTTTEE",
+            leadingBarButton: { Image(systemName: "trash.slash") },
+            tralingBarButton: { Image(systemName: "trash") }
+        )
+    }}
 }
 
 struct NextScreen_Previews: PreviewProvider {
