@@ -13,6 +13,11 @@ public extension EnvironmentValues {
 
     var navigationService: NavigationService { self[NavigationServiceKey.self] }
 
+    var navigationBarSetting: NavigationBarSettingProtocol {
+        get { self[NavigationBarSettingKey.self] }
+        set { self[NavigationBarSettingKey.self] = newValue }
+    }
+    
     // MARK: - Internal properties
 
     internal var stylingProvider: StylingProviderProtocol { self[StylingProviderKey.self] }

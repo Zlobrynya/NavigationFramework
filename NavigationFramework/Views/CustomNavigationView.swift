@@ -96,8 +96,8 @@ struct NavigationView_Previews: PreviewProvider {
             Text("Test")
         }
 
-        var navigationBar: NavigationBarView {
-            NavigationBarView(title: "")
+        var navigationBar: () -> (NavigationBarView) {
+            { NavigationBarView(title: "") }
         }
     }
 }

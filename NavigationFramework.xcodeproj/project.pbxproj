@@ -36,8 +36,9 @@
 		81E4ACD227132FEB00B75C79 /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4ACD127132FEB00B75C79 /* EventsManager.swift */; };
 		81E4ACD52713353000B75C79 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4ACD42713353000B75C79 /* NavigationService.swift */; };
 		81E4ACD827133CF500B75C79 /* NavigationServiceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4ACD727133CF500B75C79 /* NavigationServiceKey.swift */; };
+		81EF83E3271B44D1004482B5 /* NavigationBarSettingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EF83E2271B44D1004482B5 /* NavigationBarSettingKey.swift */; };
+		81EF83E5271B44F1004482B5 /* NavigationBarSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EF83E4271B44F1004482B5 /* NavigationBarSetting.swift */; };
 		81F1669A26EB9E7000D04382 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F1669926EB9E7000D04382 /* NavigationBarView.swift */; };
-		81F1669F26EBB8C200D04382 /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F1669E26EBB8C200D04382 /* TestAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,8 +102,9 @@
 		81E4ACD127132FEB00B75C79 /* EventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
 		81E4ACD42713353000B75C79 /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		81E4ACD727133CF500B75C79 /* NavigationServiceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationServiceKey.swift; sourceTree = "<group>"; };
+		81EF83E2271B44D1004482B5 /* NavigationBarSettingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarSettingKey.swift; sourceTree = "<group>"; };
+		81EF83E4271B44F1004482B5 /* NavigationBarSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarSetting.swift; sourceTree = "<group>"; };
 		81F1669926EB9E7000D04382 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		81F1669E26EBB8C200D04382 /* TestAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				8166946E2715E99C0044A830 /* NavigationStackCount.swift */,
 				816694702715F0610044A830 /* NavigationData.swift */,
 				816694722715F12E0044A830 /* NavigationViewProtocol.swift */,
+				81EF83E4271B44F1004482B5 /* NavigationBarSetting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -199,7 +202,6 @@
 				81E4ACD627133CE200B75C79 /* Environments */,
 				81D5094526E38753001D4973 /* Services */,
 				81D5094026E38709001D4973 /* Views */,
-				81F1669B26EB9F0700D04382 /* Modifers */,
 				8166946D2715E97F0044A830 /* Models */,
 				81D5091726E3867B001D4973 /* NavigationFramework.h */,
 				81D5091826E3867B001D4973 /* NavigationFramework.docc */,
@@ -293,16 +295,9 @@
 			children = (
 				81E4ACD727133CF500B75C79 /* NavigationServiceKey.swift */,
 				8166946B2715E94F0044A830 /* NavigationStackCountKey.swift */,
+				81EF83E2271B44D1004482B5 /* NavigationBarSettingKey.swift */,
 			);
 			path = Environments;
-			sourceTree = "<group>";
-		};
-		81F1669B26EB9F0700D04382 /* Modifers */ = {
-			isa = PBXGroup;
-			children = (
-				81F1669E26EBB8C200D04382 /* TestAnimation.swift */,
-			);
-			path = Modifers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,7 +442,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81F1669F26EBB8C200D04382 /* TestAnimation.swift in Sources */,
 				8138711127007CDB00BE1D7E /* Bundle.swift in Sources */,
 				816694732715F12E0044A830 /* NavigationViewProtocol.swift in Sources */,
 				81D5095026E390D6001D4973 /* View.swift in Sources */,
@@ -461,7 +455,9 @@
 				816694712715F0610044A830 /* NavigationData.swift in Sources */,
 				81E4ACD52713353000B75C79 /* NavigationService.swift in Sources */,
 				81D5094726E3876B001D4973 /* NavigationViewModel.swift in Sources */,
+				81EF83E5271B44F1004482B5 /* NavigationBarSetting.swift in Sources */,
 				8166946F2715E99C0044A830 /* NavigationStackCount.swift in Sources */,
+				81EF83E3271B44D1004482B5 /* NavigationBarSettingKey.swift in Sources */,
 				8166946C2715E94F0044A830 /* NavigationStackCountKey.swift in Sources */,
 				813EB04D270A180B00CFBDC1 /* DiContainer.swift in Sources */,
 				81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */,
