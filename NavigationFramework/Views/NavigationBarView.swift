@@ -70,7 +70,7 @@ public struct NavigationBarView: View {
 
     private var backgoundStatusBar: some View {
         Rectangle()
-            .fill(navigationBarSetting.backgoundColor)
+            .fill(navigationBarSetting.backgroundColor)
             .frame(height: stylingProvider.statusBarHeight)
     }
 
@@ -80,7 +80,7 @@ public struct NavigationBarView: View {
             titleView
         }
         .frame(height: stylingProvider.navigationBarHeight)
-        .background(navigationBarSetting.backgoundColor)
+        .background(navigationBarSetting.backgroundColor)
     }
 
     private var titleView: some View {

@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 public protocol NavigationBarSettingProtocol {
-    /// Navigation backgound color.
-    var backgoundColor: Color { get }
+    /// Navigation background color.
+    var backgroundColor: Color { get }
 
-    /// Bunnot back color.
+    /// Button back color.
     var buttonBackColor: Color { get }
 
-    /// Should hide diver.
+    /// Should hide diver under navigation bar.
     var shouldHideDivider: Bool { get }
 }
 
@@ -23,7 +23,7 @@ public struct NavigationBarSetting: NavigationBarSettingProtocol {
 
     // MARK: - Public properties
 
-    public var backgoundColor: Color
+    public var backgroundColor: Color
     public var buttonBackColor: Color
     public var shouldHideDivider: Bool
 
@@ -34,7 +34,7 @@ public struct NavigationBarSetting: NavigationBarSettingProtocol {
         buttonBackColor: Color = Color.backgroundNavigationBack,
         shouldHideDivider: Bool = false
     ) {
-        self.backgoundColor = backgoundColor
+        self.backgroundColor = backgoundColor
         self.buttonBackColor = buttonBackColor
         self.shouldHideDivider = shouldHideDivider
     }

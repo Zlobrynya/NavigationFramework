@@ -13,7 +13,7 @@ public extension EnvironmentValues {
 
     var navigationService: NavigationService { self[NavigationServiceKey.self] }
 
-    var navigationBarSetting: NavigationBarSetting {
+    var navigationBarSetting: NavigationBarSettingProtocol {
         get { self[NavigationBarSettingKey.self] }
         set { self[NavigationBarSettingKey.self] = newValue }
     }

@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 public struct NavigationBarSettingKey: EnvironmentKey {
-    public static let defaultValue: NavigationBarSetting = NavigationBarSetting()
+    public static let defaultValue: NavigationBarSettingProtocol = NavigationBarSetting()
 }
