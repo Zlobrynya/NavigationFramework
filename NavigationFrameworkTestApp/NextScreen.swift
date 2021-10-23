@@ -13,6 +13,7 @@ struct NextScreen: NavigationViewProtocol {
     @Environment(\.navigationService) var navigationService
 
     @State var count = 0
+    @State var shouldSheetScreen = false
 
     var body: some View {
         VStack {
@@ -26,14 +27,15 @@ struct NextScreen: NavigationViewProtocol {
                 label: { Text("New screen") }
             )
             Button(action: { count += 1 }, label: { Text("Count") })
-        }
+            Button(action: { shouldSheetScreen = true }, label: { Text("Open sheet screen") })
+        }.sheet(isPresented: $shouldSheetScreen, content: { NewSheetScreen() })
     }
 
     var navigationBar: () -> (NavigationBarView) {{
         NavigationBarView(
             title: "TESTTTTEE",
             leadingBarButton: { Image(systemName: "trash.slash") },
-            tralingBarButton: { Image(systemName: "trash") }
+            trailingBarButton: { Image(systemName: "trash") }
         )
     }}
 }

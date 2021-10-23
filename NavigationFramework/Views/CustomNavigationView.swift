@@ -36,8 +36,18 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
         .onDisappear {
             navigationService.onDisappear()
         }
-        .gesture(
-            DragGesture()
+    }
+
+    // MARK: - Views
+
+    @ViewBuilder
+    private func view(forItem item: NavigationDataProtocol, withIndex index: Int) -> some View {
+        let isLast = navigationService.stack.isLast(forId: item.id)
+        item.view.fullScreen()
+            .offset(x: isLast ? navigationService.offset : 0)
+            .overlay(isLast ? nil : overlayPreviousScreens)
+            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+            .simultaneousGesture(DragGesture()
                 .onChanged {
                     guard navigationService.stack.count > 1 else { return }
                     if navigationService.shouldStartGesture {
@@ -58,19 +68,7 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
                             navigationService.offset = 0
                         }
                     }
-                }
-        )
-    }
-
-    // MARK: - Views
-
-    @ViewBuilder
-    private func view(forItem item: NavigationDataProtocol, withIndex index: Int) -> some View {
-        let isLast = navigationService.stack.isLast(forId: item.id)
-        item.view.fullScreen()
-            .offset(x: isLast ? navigationService.offset : 0)
-            .overlay(isLast ? nil : overlayPreviousScreens)
-            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+                })
         VStack {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
             Spacer()
