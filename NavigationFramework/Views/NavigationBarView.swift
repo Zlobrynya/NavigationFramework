@@ -21,8 +21,8 @@ public struct NavigationBarView: View {
     @Environment(\.navigationBarSetting) private var navigationBarSetting
 
     private var title: () -> AnyView
-    private var tralingBarButton: () -> AnyView
     private var leadingBarButton: () -> AnyView
+    private var trailingBarButton: () -> AnyView
 
     // MARK: - Lifecycle
 
@@ -30,7 +30,7 @@ public struct NavigationBarView: View {
         self.init(
             title: { Text(title) },
             leadingBarButton: { EmptyView() },
-            tralingBarButton: { EmptyView() }
+            trailingBarButton: { EmptyView() }
         )
     }
 
@@ -38,29 +38,29 @@ public struct NavigationBarView: View {
         self.init(
             title: title,
             leadingBarButton: { EmptyView() },
-            tralingBarButton: { EmptyView() }
+            trailingBarButton: { EmptyView() }
         )
     }
 
     public init<TrailingContent>(
         title: String,
-        tralingBarButton: @escaping () -> TrailingContent
+        trailingBarButton: @escaping () -> TrailingContent
     ) where TrailingContent: View {
         self.init(
             title: { Text(title) },
             leadingBarButton: { EmptyView() },
-            tralingBarButton: tralingBarButton
+            trailingBarButton: trailingBarButton
         )
     }
 
     public init<TitleContent, TrailingContent>(
         title: @escaping () -> TitleContent,
-        tralingBarButton: @escaping () -> TrailingContent
+        trailingBarButton: @escaping () -> TrailingContent
     ) where TrailingContent: View, TitleContent: View {
         self.init(
             title: title,
             leadingBarButton: { EmptyView() },
-            tralingBarButton: tralingBarButton
+            trailingBarButton: trailingBarButton
         )
     }
 
@@ -71,7 +71,7 @@ public struct NavigationBarView: View {
         self.init(
             title: { Text(title) },
             leadingBarButton: leadingBarButton,
-            tralingBarButton: { EmptyView() }
+            trailingBarButton: { EmptyView() }
         )
     }
 
@@ -82,29 +82,29 @@ public struct NavigationBarView: View {
         self.init(
             title: title,
             leadingBarButton: leadingBarButton,
-            tralingBarButton: { EmptyView() }
+            trailingBarButton: { EmptyView() }
         )
     }
     
     public init<LeadingContent, TrailingContent>(
         title: String,
         leadingBarButton: @escaping () -> LeadingContent,
-        tralingBarButton: @escaping () -> TrailingContent
+        trailingBarButton: @escaping () -> TrailingContent
     ) where LeadingContent: View, TrailingContent: View {
         self.init(
             title: { Text(title) },
             leadingBarButton: leadingBarButton,
-            tralingBarButton: tralingBarButton
+            trailingBarButton: trailingBarButton
         )
     }
 
     public init<LeadingContent, TitleContent, TrailingContent>(
         title: @escaping () -> TitleContent,
         leadingBarButton: @escaping () -> LeadingContent,
-        tralingBarButton: @escaping () -> TrailingContent
+        trailingBarButton: @escaping () -> TrailingContent
     ) where LeadingContent: View, TitleContent: View, TrailingContent: View {
         self.title = { title().asAnyView() }
-        self.tralingBarButton = { tralingBarButton().asAnyView() }
+        self.trailingBarButton = { trailingBarButton().asAnyView() }
         self.leadingBarButton = { leadingBarButton().asAnyView() }
     }
 
@@ -112,7 +112,7 @@ public struct NavigationBarView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            backgoundStatusBar
+            backgroundStatusBar
             navigationBar
             divider
         }
@@ -120,7 +120,7 @@ public struct NavigationBarView: View {
 
     // MARK: - Views
 
-    private var backgoundStatusBar: some View {
+    private var backgroundStatusBar: some View {
         Rectangle()
             .fill(navigationBarSetting.backgroundColor)
             .frame(height: stylingProvider.statusBarHeight)
@@ -147,11 +147,17 @@ public struct NavigationBarView: View {
         HStack(spacing: 4) {
             backButton
             leadingBarButton()
-                .frame(width: stylingProvider.navigationButtonSize, height: stylingProvider.navigationButtonSize)
+                .frame(
+                    width: stylingProvider.navigationButtonSize,
+                    height: stylingProvider.navigationButtonSize
+                )
                 .padding(3)
             Spacer()
-            tralingBarButton()
-                .frame(width: stylingProvider.navigationButtonSize, height: stylingProvider.navigationButtonSize)
+            trailingBarButton()
+                .frame(
+                    width: stylingProvider.navigationButtonSize,
+                    height: stylingProvider.navigationButtonSize
+                )
                 .padding(3)
         }.padding(.horizontal, 8)
     }

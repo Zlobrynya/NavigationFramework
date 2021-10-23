@@ -28,6 +28,5 @@ struct ContentView: NavigationViewProtocol {
 
     var navigationBar: () -> (NavigationBarView) {{
         NavigationBarView(title: "test")
-
     }}
 }
