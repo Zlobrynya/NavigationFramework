@@ -31,13 +31,13 @@ struct NextScreen: NavigationViewProtocol {
         }.sheet(isPresented: $shouldSheetScreen, content: { NewSheetScreen() })
     }
 
-    var navigationBar: () -> (NavigationBarView) {{
-        NavigationBarView(
-            title: "TESTTTTEE",
-            leadingBarButton: { Image(systemName: "trash.slash") },
-            trailingBarButton: { Image(systemName: "trash") }
-        )
-    }}
+//    var navigationBar: (() -> (NavigationBarView))? {{
+//        NavigationBarView(
+//            title: "TESTTTTEE",
+//            leadingBarButton: { Image(systemName: "trash.slash") },
+//            trailingBarButton: { Image(systemName: "trash") }
+//        )
+//    }}
 }
 
 struct NextScreen_Previews: PreviewProvider {

@@ -46,7 +46,10 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
         item.view.fullScreen()
             .offset(x: isLast ? navigationService.offset : 0)
             .overlay(isLast ? nil : overlayPreviousScreens)
-            .padding(.top, stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight)
+            .padding(
+                .top,
+                !item.navBar ? stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight : 0
+            )
             .simultaneousGesture(DragGesture()
                 .onChanged {
                     guard navigationService.stack.count > 1 else { return }

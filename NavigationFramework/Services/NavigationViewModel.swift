@@ -50,7 +50,7 @@ final class NavigationViewModel: ObservableObject, NavigationObserver {
     // MARK: - Public functions
 
     func push<Content>(_ content: Content) where Content: NavigationViewProtocol {
-        let content = NavigationData(view: content.asAnyView(), navigationBar: content.navigationBar(), id: UUID())
+        let content = NavigationData(view: content.asAnyView(), navigationBar: content.navigationBar?(), id: UUID())
         stack.append(content)
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width

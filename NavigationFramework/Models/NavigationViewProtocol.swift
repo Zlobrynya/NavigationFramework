@@ -8,5 +8,9 @@
 import SwiftUI
 
 public protocol NavigationViewProtocol: View {
-    var navigationBar: () -> (NavigationBarView) { get }
+    var navigationBar: (() -> (NavigationBarView))? { get }
+}
+
+public extension NavigationViewProtocol {
+    var navigationBar: (() -> (NavigationBarView))? { nil }
 }
