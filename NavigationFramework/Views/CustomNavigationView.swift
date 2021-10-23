@@ -24,18 +24,15 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
     // MARK: - Body
 
     public var body: some View {
-        ZStack {
+        ZStack(alignment: .leading) {
             ForEach(Array(navigationService.stack.enumerated()), id: \.offset) { index, element in
                 view(forItem: element, withIndex: index)
             }
+            rectangleDefiningGestures
         }
         .fullScreen()
-        .onAppear {
-            navigationService.onAppear(with: firstScreen())
-        }
-        .onDisappear {
-            navigationService.onDisappear()
-        }
+        .onAppear { navigationService.onAppear(with: firstScreen()) }
+        .onDisappear { navigationService.onDisappear() }
     }
 
     // MARK: - Views
@@ -50,28 +47,6 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
                 .top,
                 !item.navBar ? stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight : 0
             )
-            .simultaneousGesture(DragGesture()
-                .onChanged {
-                    guard navigationService.stack.count > 1 else { return }
-                    if navigationService.shouldStartGesture {
-                        navigationService.offset = $0.location.x
-                    } else if $0.startLocation.x < 25 {
-                        navigationService.shouldStartGesture = true
-                    }
-                }
-                .onEnded {
-                    guard navigationService.shouldStartGesture else { return }
-                    defer {
-                        navigationService.shouldStartGesture = false
-                    }
-                    if $0.location.x > (UIScreen.main.bounds.width * 0.7) {
-                        navigationService.pop()
-                    } else {
-                        withAnimation(Animation.linear(duration: 0.2)) {
-                            navigationService.offset = 0
-                        }
-                    }
-                })
         VStack {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
             Spacer()
@@ -81,6 +56,45 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
     private var overlayPreviousScreens: AnyView? {
         guard navigationService.stack.count > 1 else { return nil }
         return AnyView(navigationService.backgroundColor)
+    }
+    
+    private var rectangleDefiningGestures: some View {
+        Rectangle()
+            .fill(Color.clear)
+            .frame(width: 5)
+            .contentShape(Rectangle())
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged {
+                        guard navigationService.stack.count > 1 else { return }
+                        if navigationService.shouldStartGesture {
+                            navigationService.offset = $0.location.x
+                        } else if $0.startLocation.x < 25 {
+                            navigationService.shouldStartGesture = true
+                        }
+                    }
+                    .onEnded {
+                        guard navigationService.shouldStartGesture else { return }
+                        defer {
+                            navigationService.shouldStartGesture = false
+                        }
+                        if $0.location.x > (UIScreen.main.bounds.width * 0.7) {
+                            navigationService.pop()
+                        } else {
+                            withAnimation(Animation.linear(duration: 0.2)) {
+                                navigationService.offset = 0
+                            }
+                        }
+                    }
+            )
+    }
+}
+
+struct TestR: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.addRect(CGRect(x: 0, y: 0, width: 20, height: rect.height))
+        return path
     }
 }
 
