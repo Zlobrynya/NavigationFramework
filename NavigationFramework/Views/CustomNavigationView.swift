@@ -45,7 +45,7 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
             .overlay(isLast ? nil : overlayPreviousScreens)
             .padding(
                 .top,
-                !item.navBar ? stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight : 0
+                !item.hasNavigationBar ? stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight : 0
             )
         VStack {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
@@ -98,21 +98,21 @@ struct TestR: Shape {
     }
 }
 
-struct NavigationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            Test()
-        }
-        .edgesIgnoringSafeArea(.all)
-    }
-
-    struct Test: NavigationViewProtocol {
-        var body: some View {
-            Text("Test")
-        }
-
-        var navigationBar: () -> (NavigationBarView) {
-            { NavigationBarView(title: "") }
-        }
-    }
-}
+//struct NavigationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            Test()
+//        }
+//        .edgesIgnoringSafeArea(.all)
+//    }
+//
+//    struct Test: NavigationViewProtocol {
+//        var body: some View {
+//            Text("Test")
+//        }
+//
+//        var navigationBar: View? {
+//            nil
+//        }
+//    }
+//}
