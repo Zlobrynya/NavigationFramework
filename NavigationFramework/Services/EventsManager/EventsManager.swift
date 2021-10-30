@@ -56,7 +56,8 @@ final class EventsManager: EventsManagerProtocol {
         observersAccessQueue.sync {
             observersTable.allObjects
                 .compactMap { $0 as? NavigationObserver }
-                .forEach { $0.pop() }
+                .first?
+                .pop()
         }
     }
     
@@ -64,7 +65,8 @@ final class EventsManager: EventsManagerProtocol {
         observersAccessQueue.sync {
             observersTable.allObjects
                 .compactMap { $0 as? NavigationObserver }
-                .forEach { $0.push(content) }
+                .first?
+                .push(content)
         }
     }
 }
