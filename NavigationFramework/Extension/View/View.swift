@@ -10,17 +10,15 @@ import SwiftUI
 extension View {
 
     func fullScreen() -> some View {
-        edgesIgnoringSafeArea(.all)
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: .infinity
-            )
-            .background(Color.white)
+        frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity
+        )
+        .background(Color.white)
     }
 
-    
     func asAnyView() -> AnyView {
         AnyView(self)
     }

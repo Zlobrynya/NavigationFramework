@@ -30,17 +30,15 @@ struct NextScreen: NavigationViewProtocol {
             Button(action: { shouldSheetScreen = true }, label: { Text("Open sheet screen") })
         }.sheet(isPresented: $shouldSheetScreen, content: { NewSheetScreen() })
     }
-    
 
     var navigationBar: some View {
-        NavigationBarView(
-            title: "TESTTTTEE",
-            leadingBarButton: { Image(systemName: "trash.slash") },
-            trailingBarButton: { Image(systemName: "trash") }
-        )
+        NavigationBarView(title: "TESTTTTEE")
+            .navigationItems(
+                leading: { Image(systemName: "trash.slash") },
+                trailing: { Image(systemName: "trash") }
+            )
     }
-    
-    
+
 //    var navigationBar: NavigationBar? {
 //        NavigationBarView(
 //            title: "TESTTTTEE",
