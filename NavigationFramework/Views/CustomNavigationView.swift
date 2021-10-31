@@ -40,16 +40,11 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
     @ViewBuilder
     private func view(forItem item: NavigationDataProtocol, withIndex index: Int) -> some View {
         let isLast = navigationService.stack.isLast(forId: item.id)
-        item.view.fullScreen()
-            .offset(x: isLast ? navigationService.offset : 0)
-            .overlay(isLast ? nil : overlayPreviousScreens)
-            .padding(
-                .top,
-                !item.hasNavigationBar ? stylingProvider.navigationBarHeight + stylingProvider.statusBarHeight : 0
-            )
-        VStack {
+        VStack(spacing: 0) {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
-            Spacer()
+            item.view.fullScreen()
+                .offset(x: isLast ? navigationService.offset : 0)
+                .overlay(isLast ? nil : overlayPreviousScreens)
         }
     }
 
@@ -57,7 +52,7 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
         guard navigationService.stack.count > 1 else { return nil }
         return AnyView(navigationService.backgroundColor)
     }
-    
+
     private var rectangleDefiningGestures: some View {
         Rectangle()
             .fill(Color.clear)
@@ -98,7 +93,7 @@ struct TestR: Shape {
     }
 }
 
-//struct NavigationView_Previews: PreviewProvider {
+// struct NavigationView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        NavigationView {
 //            Test()
@@ -115,4 +110,4 @@ struct TestR: Shape {
 //            nil
 //        }
 //    }
-//}
+// }
