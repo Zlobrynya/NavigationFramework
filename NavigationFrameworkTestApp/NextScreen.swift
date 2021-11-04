@@ -34,7 +34,7 @@ struct NextScreen: NavigationViewProtocol {
     var navigationBar: some View {
         NavigationBarView(title: "TESTTTTEE")
             .navigationItems(
-                leading: { Image(systemName: "trash.slash") },
+                leading: { Text("TeeeesttttttTeeeesttttttTeeeestttttt") },
                 trailing: { Image(systemName: "trash") }
             )
     }

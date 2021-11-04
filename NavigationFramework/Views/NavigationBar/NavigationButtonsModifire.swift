@@ -13,6 +13,8 @@ struct NavigationButtonsModifier<LeadingContent, TrailingContent>: ViewModifier
     // MARK: - External Dependencies
 
     @Environment(\.stylingProvider) private var stylingProvider
+    @Environment(\.navigationStackCount) private var navigationStackCount
+
     var leadingBarButton: () -> LeadingContent
     var trailingBarButton: () -> TrailingContent
 
@@ -31,15 +33,16 @@ struct NavigationButtonsModifier<LeadingContent, TrailingContent>: ViewModifier
         HStack(spacing: 4) {
             leadingBarButton()
                 .frame(
-                    width: stylingProvider.navigationButtonSize,
-                    height: stylingProvider.navigationButtonSize
+                    maxWidth: stylingProvider.navigationButtonSize * 3,
+                    maxHeight: stylingProvider.navigationButtonSize
                 )
                 .padding(3)
+                .padding(.leading, navigationStackCount.count > 1 ? 8 : 0)
             Spacer()
             trailingBarButton()
                 .frame(
-                    width: stylingProvider.navigationButtonSize,
-                    height: stylingProvider.navigationButtonSize
+                    maxWidth: stylingProvider.navigationButtonSize * 3,
+                    maxHeight: stylingProvider.navigationButtonSize
                 )
                 .padding(3)
         }.padding(.horizontal, 8)

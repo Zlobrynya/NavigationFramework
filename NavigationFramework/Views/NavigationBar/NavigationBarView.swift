@@ -36,8 +36,7 @@ public struct NavigationBarView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            navigationBar
-                .background(backgroundStatusBar)
+            navigationBar.background(backgroundStatusBar)
             divider
         }
         .background(navigationBarSetting.backgroundColor)
@@ -54,7 +53,7 @@ public struct NavigationBarView: View {
 
     private var navigationBar: some View {
         ZStack(alignment: .leading) {
-            backButton
+            backButton?.padding(.leading, 8)
             titleView
         }
         .frame(height: stylingProvider.navigationBarHeight)
