@@ -36,8 +36,8 @@ public struct NavigationBarView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            //backgroundStatusBar
             navigationBar
+                .background(backgroundStatusBar)
             divider
         }
         .background(navigationBarSetting.backgroundColor)
@@ -49,6 +49,7 @@ public struct NavigationBarView: View {
         Rectangle()
             .fill(navigationBarSetting.backgroundColor)
             .frame(height: stylingProvider.statusBarHeight)
+            .offset(y: -stylingProvider.statusBarHeight + 2)
     }
 
     private var navigationBar: some View {
