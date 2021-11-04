@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		812886CE27244AC600A684B2 /* NewSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812886CD27244AC600A684B2 /* NewSheetScreen.swift */; };
+		812FDE75272EFE5D00074036 /* NavigationButtonsModifire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDE74272EFE5D00074036 /* NavigationButtonsModifire.swift */; };
 		8138710D2700767E00BE1D7E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138710C2700767E00BE1D7E /* Color.swift */; };
 		8138710F27007C3400BE1D7E /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8138710E27007C3400BE1D7E /* Color.xcassets */; };
 		8138711127007CDB00BE1D7E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138711027007CDB00BE1D7E /* Bundle.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		812886CD27244AC600A684B2 /* NewSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSheetScreen.swift; sourceTree = "<group>"; };
+		812FDE74272EFE5D00074036 /* NavigationButtonsModifire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonsModifire.swift; sourceTree = "<group>"; };
 		8138710C2700767E00BE1D7E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8138710E27007C3400BE1D7E /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		8138711027007CDB00BE1D7E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -136,6 +138,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		812FDE73272EFE2C00074036 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				81F1669926EB9E7000D04382 /* NavigationBarView.swift */,
+				812FDE74272EFE5D00074036 /* NavigationButtonsModifire.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
 		8138711427058EDE00BE1D7E /* StylingProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +255,8 @@
 		81D5094026E38709001D4973 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				812FDE73272EFE2C00074036 /* NavigationBar */,
 				81D5094326E38724001D4973 /* CustomNavigationView.swift */,
-				81F1669926EB9E7000D04382 /* NavigationBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,6 +472,7 @@
 				81EF83E5271B44F1004482B5 /* NavigationBarSetting.swift in Sources */,
 				8166946F2715E99C0044A830 /* NavigationStackCount.swift in Sources */,
 				81EF83E3271B44D1004482B5 /* NavigationBarSettingKey.swift in Sources */,
+				812FDE75272EFE5D00074036 /* NavigationButtonsModifire.swift in Sources */,
 				8166946C2715E94F0044A830 /* NavigationStackCountKey.swift in Sources */,
 				813EB04D270A180B00CFBDC1 /* DiContainer.swift in Sources */,
 				81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */,

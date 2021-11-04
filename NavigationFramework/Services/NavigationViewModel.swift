@@ -50,7 +50,12 @@ final class NavigationViewModel: ObservableObject, NavigationObserver {
     // MARK: - Public functions
 
     func push<Content>(_ content: Content) where Content: NavigationViewProtocol {
-        let content = NavigationData(view: content.asAnyView(), navigationBar: content.navigationBar(), id: UUID())
+        let content = NavigationData(
+            id: UUID(),
+            view: content.asAnyView(),
+            navigationBar: content.navigationBar.asAnyView(),
+            hasNavigationBar: content.navigationBar is EmptyView
+        )
         stack.append(content)
         guard stack.count > 1 else { return }
         offset = UIScreen.main.bounds.width
@@ -68,13 +73,13 @@ final class NavigationViewModel: ObservableObject, NavigationObserver {
 
     // MARK: - Private functions
 
-    private func animationPop(complited: @escaping () -> Void) {
+    private func animationPop(completed: @escaping () -> Void) {
         withAnimation(Animation.linear(duration: 0.2)) {
             offset = UIScreen.main.bounds.width
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             guard let self = self else { return }
-            complited()
+            completed()
             self.offset = 0
         }
     }

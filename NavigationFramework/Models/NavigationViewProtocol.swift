@@ -8,5 +8,16 @@
 import SwiftUI
 
 public protocol NavigationViewProtocol: View {
-    var navigationBar: () -> (NavigationBarView) { get }
+
+    ///  <#Description#>
+    associatedtype NavigationBar: View
+
+    ///  <#Description#>
+    @ViewBuilder var navigationBar: Self.NavigationBar { get }
+}
+
+public extension NavigationViewProtocol {
+    var navigationBar: some View {
+        EmptyView()
+    }
 }

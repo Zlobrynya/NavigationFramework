@@ -9,12 +9,14 @@ import SwiftUI
 
 protocol NavigationDataProtocol {
     var view: AnyView { get }
-    var navigationBar: NavigationBarView { get }
+    var navigationBar: AnyView { get }
     var id: UUID { get }
+    var hasNavigationBar: Bool { get }
 }
 
 struct NavigationData: NavigationDataProtocol {
-    var view: AnyView
-    var navigationBar: NavigationBarView
     var id: UUID
+    var view: AnyView
+    var navigationBar: AnyView
+    var hasNavigationBar: Bool
 }
