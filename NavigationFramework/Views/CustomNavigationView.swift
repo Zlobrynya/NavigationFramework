@@ -7,18 +7,26 @@
 
 import SwiftUI
 
-public struct CustomNavigationView<Content>: View where Content: NavigationViewProtocol {
+public struct CustomNavigationView<Content, Animatable>: View
+    where Content: NavigationViewProtocol, Animatable: AnimatableModifier {
 
     // MARK: - External Dependencies
 
-    @StateObject var navigationService = NavigationViewModel()
     @Environment(\.stylingProvider) var stylingProvider
+    
+    @StateObject var navigationService = NavigationViewModel()
     @ViewBuilder private var firstScreen: () -> Content
+    private var animation: (CGFloat) -> Animatable
 
     // MARK: - Lifecycle
-
-    public init(firstScreen: @escaping () -> Content) {
+    
+    public init(firstScreen: @escaping () -> Content) where Animatable == DefaultAnimatableModifier {
+        self.init(animatable: { DefaultAnimatableModifier(offset: $0) }, firstScreen: firstScreen)
+    }
+    
+    public init(animatable: @escaping (CGFloat) -> Animatable, firstScreen: @escaping () -> Content) {
         self.firstScreen = firstScreen
+        self.animation = animatable
     }
 
     // MARK: - Body
@@ -43,8 +51,9 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
         VStack(spacing: 0) {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
             item.view.fullScreen()
-                .offset(x: isLast ? navigationService.offset : 0)
+//                .offset(x: isLast ? navigationService.offset : 0)
                 .overlay(isLast ? nil : overlayPreviousScreens)
+                .modifier(animation(isLast ? navigationService.offset : 0))
         }
     }
 
@@ -82,14 +91,6 @@ public struct CustomNavigationView<Content>: View where Content: NavigationViewP
                         }
                     }
             )
-    }
-}
-
-struct TestR: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.addRect(CGRect(x: 0, y: 0, width: 20, height: rect.height))
-        return path
     }
 }
 
