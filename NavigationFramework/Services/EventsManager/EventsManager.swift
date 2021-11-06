@@ -31,7 +31,7 @@ final class EventsManager: EventsManagerProtocol {
     
     init(
         observersAccessQueue: DispatchQueue = DispatchQueue(
-            label: "Test",
+            label: "EventsManagerAccessQueue",
             attributes: .concurrent
         ),
         observersTable: NSHashTable<AnyObject> = NSHashTable.weakObjects()

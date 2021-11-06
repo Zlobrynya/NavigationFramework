@@ -51,7 +51,6 @@ public struct CustomNavigationView<Content, Animatable>: View
         VStack(spacing: 0) {
             item.navigationBar.opacity(isLast ? navigationService.opacity : 1)
             item.view.fullScreen()
-//                .offset(x: isLast ? navigationService.offset : 0)
                 .overlay(isLast ? nil : overlayPreviousScreens)
                 .modifier(animation(isLast ? navigationService.offset : 0))
         }
