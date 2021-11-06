@@ -14,7 +14,7 @@ protocol StylingProviderProtocol {
     var statusBarHeight: CGFloat { get }
 }
 
-struct StyilingProvider: StylingProviderProtocol {
+struct StylingProvider: StylingProviderProtocol {
 
     var navigationBarHeight: CGFloat = 44
     var navigationButtonSize: CGFloat = 28
