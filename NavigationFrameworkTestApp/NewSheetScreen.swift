@@ -10,7 +10,9 @@ import NavigationFramework
 
 struct NewSheetScreen: View {
     var body: some View {
-        CustomNavigationView(firstScreen: NextScreen())
+        CustomNavigationView {
+            NextScreen()
+        }
     }
 }
 

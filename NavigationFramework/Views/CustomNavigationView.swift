@@ -13,20 +13,20 @@ public struct CustomNavigationView<Content, Animatable>: View
     // MARK: - External Dependencies
 
     @Environment(\.stylingProvider) var stylingProvider
-    
+
     @StateObject var navigationService = NavigationViewModel()
-    @ViewBuilder private var firstScreen: Content
+    @ViewBuilder private var firstScreen: () -> Content
     private var animation: (CGFloat) -> Animatable
 
     // MARK: - Lifecycle
-    
-    public init(firstScreen: Content) where Animatable == DefaultAnimatableModifier {
+
+    public init(@ViewBuilder firstScreen: @escaping () -> Content) where Animatable == DefaultAnimatableModifier {
         self.init(animatable: { DefaultAnimatableModifier(offset: $0) }, firstScreen: firstScreen)
     }
-    
-    public init(animatable: @escaping (CGFloat) -> Animatable, firstScreen: Content) {
+
+    public init(animatable: @escaping (CGFloat) -> Animatable, @ViewBuilder firstScreen: @escaping () -> Content) {
         self.firstScreen = firstScreen
-        self.animation = animatable
+        animation = animatable
     }
 
     // MARK: - Body
@@ -39,7 +39,7 @@ public struct CustomNavigationView<Content, Animatable>: View
             rectangleDefiningGestures
         }
         .fullScreen()
-        .onAppear { navigationService.onAppear(with: firstScreen) }
+        .onAppear { navigationService.onAppear(with: firstScreen()) }
         .onDisappear { navigationService.onDisappear() }
     }
 
