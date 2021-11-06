@@ -9,5 +9,5 @@ import Foundation
 import SwiftUI
 
 struct StylingProviderKey: EnvironmentKey {
-  static let defaultValue = StyilingProvider()
+  static let defaultValue = StylingProvider()
 }
