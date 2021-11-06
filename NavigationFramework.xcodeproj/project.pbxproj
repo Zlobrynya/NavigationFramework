@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810EFFDA2735A011002A6E5E /* DefaultAnimatableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810EFFD92735A011002A6E5E /* DefaultAnimatableModifier.swift */; };
 		812886CE27244AC600A684B2 /* NewSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812886CD27244AC600A684B2 /* NewSheetScreen.swift */; };
 		812FDE75272EFE5D00074036 /* NavigationButtonsModifire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FDE74272EFE5D00074036 /* NavigationButtonsModifire.swift */; };
 		8138710D2700767E00BE1D7E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8138710C2700767E00BE1D7E /* Color.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		810EFFD92735A011002A6E5E /* DefaultAnimatableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnimatableModifier.swift; sourceTree = "<group>"; };
 		812886CD27244AC600A684B2 /* NewSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSheetScreen.swift; sourceTree = "<group>"; };
 		812FDE74272EFE5D00074036 /* NavigationButtonsModifire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationButtonsModifire.swift; sourceTree = "<group>"; };
 		8138710C2700767E00BE1D7E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		810EFFD827359FF2002A6E5E /* AnimatableModifier */ = {
+			isa = PBXGroup;
+			children = (
+				810EFFD92735A011002A6E5E /* DefaultAnimatableModifier.swift */,
+			);
+			path = AnimatableModifier;
+			sourceTree = "<group>";
+		};
 		812FDE73272EFE2C00074036 /* NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 				81D5094526E38753001D4973 /* Services */,
 				81D5094026E38709001D4973 /* Views */,
 				8166946D2715E97F0044A830 /* Models */,
+				810EFFD827359FF2002A6E5E /* AnimatableModifier */,
 				81D5091726E3867B001D4973 /* NavigationFramework.h */,
 				81D5091826E3867B001D4973 /* NavigationFramework.docc */,
 				8138710E27007C3400BE1D7E /* Color.xcassets */,
@@ -476,6 +487,7 @@
 				8166946C2715E94F0044A830 /* NavigationStackCountKey.swift in Sources */,
 				813EB04D270A180B00CFBDC1 /* DiContainer.swift in Sources */,
 				81D5091926E3867B001D4973 /* NavigationFramework.docc in Sources */,
+				810EFFDA2735A011002A6E5E /* DefaultAnimatableModifier.swift in Sources */,
 				8138711327058EAF00BE1D7E /* StylingProvider.swift in Sources */,
 				81E4ACD827133CF500B75C79 /* NavigationServiceKey.swift in Sources */,
 			);

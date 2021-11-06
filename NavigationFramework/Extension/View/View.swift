@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
 
     func fullScreen() -> some View {
-        edgesIgnoringSafeArea(.horizontal)
+        edgesIgnoringSafeArea([.horizontal, .bottom])
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,
