@@ -12,9 +12,7 @@ import SwiftUI
 struct NavigationFrameworkTestApp: App {
     var body: some Scene {
         WindowGroup {
-            CustomNavigationView {
-                ContentView()
-            }
+            CustomNavigationView(firstScreen: ContentView())
         }
     }
 }
